@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import reactLogo from "./assets/react.svg"
 import viteLogo from "/vite.svg"
 import { CryptoListItem } from "./components/CryptoList"
+import Appbar from "./components/Appbar"
+import LoadingPage from "./Loading/Loading"
+import { RouterProvider } from "react-router-dom"
+import { router } from "./routes/browserRoutes"
 // import "./App.css"
 
 export interface CoinDetail {
@@ -59,8 +63,9 @@ function App() {
 	//             )
 
 	return (
-		<>
-			<div
+		<Suspense fallback={<LoadingPage />}>
+			<RouterProvider router={router} />
+			{/* <div
 				id="appbar"
 				style={{ display: "flex", justifyContent: "center", width: "100vw" }}>
 				<ul>
@@ -85,20 +90,12 @@ function App() {
 						<a href="#about">About</a>
 					</li>
 				</ul>
-			</div>
+			</div> */}
+			{/* <Appbar />
 			<div style={{ overflow: "auto" }}>
-				<ul style={{ listStyleType: "none", width: "100%", height: "700px" }}>
-					{data.map((stuff, index) => {
-						const { id } = stuff
-						return (
-							<li key={id}>
-								<CryptoListItem coinListData={stuff} ranking={index + 1} />
-							</li>
-						)
-					})}
-				</ul>
-			</div>
-		</>
+				
+			</div> */}
+		</Suspense>
 	)
 }
 
